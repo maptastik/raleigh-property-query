@@ -1,0 +1,22 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #map {
+    height: 100%;
+    font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.leaflet-sidebar {
+    padding: 0;
+}
+.leaflet-touch .leaflet-sidebar > .leaflet-control {
+    border: 0;
+}
+.leaflet-sidebar .close {
+    z-index: 800;
+}
+
+#divSubmitButton {
+    padding-top: 15px;
+}
