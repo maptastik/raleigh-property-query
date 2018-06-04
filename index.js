@@ -17,3 +17,48 @@ sidebar.show();
 map.on('click', function(e) {
     console.log(e.latlng)
 })
+
+// Query Functions
+
+function getZoningValues(){
+    var selectZoning = $(".selectZoning")
+    var selectedZoningArray = []
+    for (var i = 0; i<selectZoning.length; i++){
+        if (selectZoning[i].checked === true)
+        {
+            selectedZoningArray.push(selectZoning[i].value)
+        }
+    }
+    return selectedZoningArray
+}
+
+function getRadioValue(name){
+    var val;
+    var radios = document.getElementsByName(name);
+
+    for (var i = 0; i < radios.length; i++){
+        if (radios[i].checked) {
+            val = radios[i].value;
+            break
+        }
+    }
+    return val;
+}
+
+function getNumericInput(name){
+    return document.getElementsByName(name)[0].value;
+}
+
+$("#divSubmitButton").click(function(){
+    console.log("Submit Button Clicked")
+    console.log("SELECT ZONING CLASS")
+    console.log(getZoningValues())
+    console.log("CHOOSE IF EXEMPT PROPERTIES WILL BE INCLUDED")
+    console.log(getRadioValue("optExempt"))
+    console.log("CHOOSE THE SEARCH AREA")
+    console.log(getRadioValue("optSearchArea"))
+    console.log("SET MINIMUM PARCELS SIZE")
+    console.log(getNumericInput("minParcelSizeInput"))
+    console.log("SET MAXIMUM PARCEL SIZE")
+    console.log(getNumericInput("maxParcelSizeInput"))
+})
