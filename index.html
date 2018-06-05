@@ -76,7 +76,7 @@
                         <label><input type="checkbox" class="selectZoning" value="Residential-4">R-4</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" class="selectZoning" value="Residential-6">R-6</label>
+                        <label><input type="checkbox" class="selectZoning" value="Residential-6" checked>R-6</label>
                     </div>
                     <div class="checkbox">
                         <label><input type="checkbox" class="selectZoning" value="Residential-10">R-10</label>
@@ -95,10 +95,10 @@
             </div>
             <div id="divExemptOptions" class="col-xs-12">
                     <div class="col-xs-12">
-                        <label><input type="radio" name="optExempt" value="ALL" checked>Include</label>
+                        <label><input type="radio" name="optExempt" value="ALL">Include</label>
                     </div>
                     <div class="col-xs-12">
-                        <label><input type="radio" name="optExempt" value="EXEMPT">Exclude</label>
+                        <label><input type="radio" name="optExempt" value="EXEMPT" checked>Exclude</label>
                     </div>  
                 </div>
         </div>
@@ -108,10 +108,13 @@
             </div>
             <div id="divSearchAreaOptions" class="col-xs-12">
                 <div class="col-xs-12">
-                    <label><input type="radio" name="optSearchArea" value="ALL" checked>Raleigh ETJ</label>
+                    <label><input type="radio" name="optSearchArea" value="ETJ">Raleigh ETJ</label>
                 </div>
                 <div class="col-xs-12">
-                    <label><input type="radio" name="optSearchArea" value="ITB">Inside the Beltline</label>
+                    <label><input type="radio" name="optSearchArea" value="ITB" checked>Inside the Beltline</label>
+                </div>
+                <div class="col-xs-12">
+                    <label><input type="radio" name="optSearchArea" value="OTB">Outside the Beltline</label>
                 </div>  
             </div>
         </div>
@@ -121,7 +124,7 @@
                 <h2>Minimum Parcel Size</h2>
             </div>
             <div id="divMinParcelInput" class="col-xs-12">
-                <input type="number" name="minParcelSizeInput" placeholder="0.00" step="0.10" min="0" max="1000000" value="0">
+                <input type="number" name="minParcelSizeInput" placeholder="0.33" step="0.10" min="0" max="1000000" value="0.33">
             </div>
         </div>
 
@@ -150,6 +153,7 @@
     <!-- <script src="https://code.jquery.com/jquery-migrate-3.0.1.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="./src/leaflet/leaflet.js"></script>
+    <script src="https://libs.cartocdn.com/carto.js/v4.0.8/carto.min.js"></script>
     <script src="./src/plugins/leaflet-sidebar/L.Control.Sidebar.js"></script>
     <script src="index.js"></script>
 </body>
