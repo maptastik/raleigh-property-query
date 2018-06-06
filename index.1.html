@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>QueryRal</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./src/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="./src/css/bootstrap-theme.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="./src/leaflet/leaflet.css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="./src/plugins/leaflet-sidebar/L.Control.Sidebar.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="sidebar" class="col-md-3">
+        <h1>QueryRal</h1>
+        <div id="divSelectZoning" class="col-xs-12">
+            <div id="divSelectZoningLabel" class="col-xs-12">
+                <h2>Select Zoning Class</h2>
+            </div>
+            <div id="divSelectZoningOptions" class="col-xs-12">
+                <div class="col-xs-4">
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Agricultural Productive">Agricultural Productive</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Conservation Management">Conservation Management</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Commercial Mixed Use">Commercial Mixed Use</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Downtown Mixed Use">Downtown Mixed Use</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Heavy Industrial">Heavy Industrial</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Industrial Mixed Use">Industrial Mixed Use</label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Manufactured Housing">Manufactured Housing</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Neighborhood Mixed Use">Neighborhood Mixed Use</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Office Park">Office Park</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Office Mixed Use">Office Mixed Use</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Planned Development">Planned Development</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Residential-1">R-1</label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Residential-2">R-2</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Residential-4">R-4</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Residential-6" checked>R-6</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning" value="Residential-10">R-10</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="selectZoning"w value="Residential Mixed Use">Residential Mixed Use</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="divExempt" class="col-xs-12">
+            <div id="divExemptLabel" class="col-xs-12">
+                <h2>Exempt Properties</h2>
+                <p><i>Exempt properties tend to be publicly owned land</i></p>
+            </div>
+            <div id="divExemptOptions" class="col-xs-12">
+                    <div class="col-xs-12">
+                        <label><input type="radio" name="optExempt" value="ALL">Include</label>
+                    </div>
+                    <div class="col-xs-12">
+                        <label><input type="radio" name="optExempt" value="EXEMPT" checked>Exclude</label>
+                    </div>  
+                </div>
+        </div>
+        <div id="divSearchArea" class="col-xs-12">
+            <div id="divSearchAreaLabel" class="col-xs-12">
+                <h2>Define Search Area</h2>
+            </div>
+            <div id="divSearchAreaOptions" class="col-xs-12">
+                <div class="col-xs-12">
+                    <label><input type="radio" name="optSearchArea" value="ETJ">Raleigh ETJ</label>
+                </div>
+                <div class="col-xs-12">
+                    <label><input type="radio" name="optSearchArea" value="ITB" checked>Inside the Beltline</label>
+                </div>
+                <div class="col-xs-12">
+                    <label><input type="radio" name="optSearchArea" value="OTB">Outside the Beltline</label>
+                </div>  
+            </div>
+        </div>
+
+        <div id="divMinParcel" class="col-xs-12">
+            <div id="divMinParcelLabel" class="col-xs-12">
+                <h2>Minimum Parcel Size</h2>
+            </div>
+            <div id="divMinParcelInput" class="col-xs-12">
+                <input type="number" name="minParcelSizeInput" placeholder="0.33" step="0.10" min="0" max="1000000" value="0.33">
+            </div>
+        </div>
+
+        <div id="divMaxParcel" class="col-xs-12">
+            <div id="divMaxParcelLabel" class="col-xs-12">
+                <h2>Maximum Parcel Size</h2>
+            </div>
+            <div id="divMaxParcelInput" class="col-xs-12">
+                <input type="number" name="maxParcelSizeInput" placeholder="1000000" step="0.10" min="0" max="1000000" value="1000000">
+            </div>
+        </div>
+        <div id="divSubmit" class="col-xs-12">
+            <div id="divSubmitButtonContainer" class="col-xs-12 text-center">
+                <button id="divSubmitButton" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+    <!-- <div id="sidebar">
+        <h1>test</h1>
+    </div> -->
+        
+    <div id="map" class="col-md-12"></div>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
+    <script src="./src/jquery/jquery-3.3.1.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-migrate-3.0.1.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="./src/leaflet/leaflet.js"></script>
+    <script src="https://libs.cartocdn.com/carto.js/v4.0.8/carto.min.js"></script>
+    <script src="./src/plugins/leaflet-sidebar/L.Control.Sidebar.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,18 +1,18 @@
 var map = L.map('map', {
     center: [35.779590, -78.638179],
-    zoom: 13
+    zoom: 13,
+    zoomControl: false
 });
+
+L.control.zoom({
+    position:'topright'
+}).addTo(map);
 
 L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
 	subdomains: 'abcd',
 	maxZoom: 19
 }).addTo(map);
-// var marker = L.marker([-78.638179, 35.779590]).addTo(map);
-var sidebar = L.control.sidebar('sidebar', {
-    closeButton: false
-}).addTo(map);
-sidebar.show();
 
 map.on('click', function(e) {
     console.log(e.latlng)
@@ -25,12 +25,12 @@ var client = new carto.Client({
 });
 
 baseQuery = `
-select p.*
+select p.*, z.zone_type, z.zone_type_decode
 from parcels_raleigh p,
 	 raleigh_search_areas r,
-     (SELECT the_geom
+     (SELECT the_geom, zone_type, zone_type_decode
 	  FROM raleigh_zoning
-      WHERE zone_type IN ('R-6')) z
+      WHERE zone_type_decode IN ('Residential-6')) z
 WHERE r.name = 'ITB' 
 AND st_intersects(st_centroid(p.the_geom), r.the_geom)
 AND st_intersects(st_centroid(p.the_geom), z.the_geom)
@@ -44,9 +44,62 @@ var style = new carto.style.CartoCSS(`
         line-width: 0.25;
         line-color: #000;
         polygon-opacity: 0.75;
-        polygon-fill: #abc123;
+        [zone_type = 'R-1'] {
+            polygon-fill: rgb(220, 255, 210);  
+        }
+        [zone_type = 'R-2'] {
+            polygon-fill: rgb(255, 251, 212);  
+        }
+        [zone_type = 'R-4'] {
+            polygon-fill: rgb(255, 250, 150);  
+        }
+        [zone_type = 'R-6'] {
+            polygon-fill: rgb(255, 245, 0);  
+        }
+        [zone_type = 'R-10'] {
+            polygon-fill: rgb(234, 208, 0);  
+        }
+        [zone_type = 'RX-'] {
+            polygon-fill: rgb(255, 150, 0);  
+        }
+        [zone_type = 'OP-'] {
+            polygon-fill: rgb(0, 92, 230);  
+        }
+        [zone_type = 'OX-'] {
+            polygon-fill: rgb(115, 225, 255);  
+        }
+        [zone_type = 'NX-'] {
+            polygon-fill: rgb(255, 168, 175);  
+        }
+        [zone_type = 'CX-'] {
+            polygon-fill: rgb(255, 0, 0);  
+        }
+        [zone_type = 'DX-'] {
+            polygon-fill: rgb(115, 0, 0);  
+        }
+        [zone_type = 'IX-'] {
+            polygon-fill: rgb(200, 166, 255);  
+        }
+        [zone_type = 'CM'] {
+            polygon-fill: rgb(122, 201, 115);  
+        }
+        [zone_type = 'AP'] {
+            polygon-fill: rgb(200, 247, 79);  
+        }
+        [zone_type = 'IH'] {
+            polygon-fill: rgb(133, 81, 162);  
+        }
+        [zone_type = 'MH'] {
+            polygon-fill: rgb(137, 112, 68);  
+        }
+        [zone_type = 'CMP'] {
+            polygon-fill: rgb(102, 153, 205);  
+        }
+        [zone_type = 'PD'] {
+            polygon-fill: rgb(255, 115, 223);  
+        }
     }
-`)
+`);
 
 var parcelSource = new carto.source.SQL(baseQuery);
 var layer = new carto.layer.Layer(parcelSource, style, {
@@ -88,33 +141,22 @@ function getNumericInput(name){
 }
 
 var getUserQuery = function(){
-    console.log("Submit Button Clicked")
-    console.log("SELECT ZONING CLASS")
     userZoningValues = getZoningValues()
-    console.log(getZoningValues())
-    console.log("CHOOSE IF EXEMPT PROPERTIES WILL BE INCLUDED")
     userExemptSelection = getRadioValue("optExempt")
     if (userExemptSelection === 'EXEMPT') {
         var userExemptSeletionQuery = "AND p.land_cla_1 NOT IN ('EXEMPT')";
     } else {
         var userExemptSeletionQuery = "";
     }
-    console.log(getRadioValue("optExempt"))
-    console.log("CHOOSE THE SEARCH AREA")
     var userSearchArea = getRadioValue("optSearchArea")
-    console.log(getRadioValue("optSearchArea"))
-    console.log("SET MINIMUM PARCELS SIZE")
     var userMinParcelSize = getNumericInput("minParcelSizeInput")
-    console.log(getNumericInput("minParcelSizeInput"))
-    console.log("SET MAXIMUM PARCEL SIZE")
     var userMaxParcelSize = getNumericInput("maxParcelSizeInput")
-    console.log(getNumericInput("maxParcelSizeInput"))
 
     var userQuery = `
-    select p.*
+    select p.*, z.zone_type, z.zone_type_decode
     from parcels_raleigh p,
         raleigh_search_areas r,
-        (SELECT the_geom
+        (SELECT the_geom, zone_type, zone_type_decode
         FROM raleigh_zoning
         WHERE zone_type_decode IN (${userZoningValues})) z
     WHERE r.name = '${userSearchArea}' 
@@ -124,9 +166,8 @@ var getUserQuery = function(){
     AND (st_area(st_transform(p.the_geom, 2264))/43560) < ${userMaxParcelSize}
     ${userExemptSeletionQuery}
     `
-    console.log(userQuery)
     return parcelSource.setQuery(userQuery);
-
 }
 
-$("#divSubmitButton").click(getUserQuery);
+$("#runQueryButton").click(getUserQuery);
+
