@@ -80,10 +80,6 @@
                     <a role="menuitem" tabindex="0" data-target="#panelQuery" aria-haspopup="true">
                         <span class="glyphicon glyphicon-question-sign"></span> Query</a>
                 </li>
-                <li>
-                    <a class="visible-xs" role="button" data-target="#panelSearch" aria-haspopup="true">
-                        <span class="glyphicon glyphicon-search"></span> Search</a>
-                </li>
                 <!-- <li><a role="menuitem" tabindex="0" data-target="#panelBasemaps" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li> -->
                 <li>
                     <a role="menuitem" tabindex="0" id="calciteToggleNavbar" aria-haspopup="true">
@@ -119,24 +115,24 @@
 
     <div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light panel-group calcite-bgcolor-dark-blue" role="tablist" aria-multiselectable="true">
 
-        <!-- Panel - Settings -->
+        <!-- Panel - Query -->
 
-        <div id="panelSettings" class="panel collapse in">
+        <div id="panelQuery" class="panel collapse in">
 
-            <div id="headingSettings" class="panel-heading">
+            <div id="headingQuery" class="panel-heading" role="tab">
                 <div class="panel-title">
-                    <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseSettings" aria-expanded="true" aria-controls="collapseSettings">
+                    <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseQuery" aria-expanded="true" aria-controls="collapseQuery">
                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                         <span class="panel-label">Query</span>
                     </a>
 
-                    <a class="panel-close" role="button" data-toggle="collapse" tabindex="0" href="#panelSettings">
+                    <a class="panel-close" role="button" data-toggle="collapse" tabindex="0" href="#panelQuery">
                         <span class="esri-icon esri-icon-close" aria-hidden="true"></span>
                     </a>
                 </div>
             </div>
 
-            <div id="collapseSettings" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSettings">
+            <div id="collapseQuery" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingQuery">
                 <div class="panel-body">
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active">
